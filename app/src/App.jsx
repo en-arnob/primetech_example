@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/actions";
+import { TiShoppingCart } from "react-icons/ti";
 
 const App = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const cartItemCount = useSelector((state) => state.cartItemCount);
 
-  const handleAddToCart = (productId) => {
-    dispatch(addToCart(productId));
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
   };
 
   const [limit, setLimit] = useState(12);
@@ -65,10 +66,13 @@ const App = () => {
 
             <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
               <button
-                className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                className=" rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-900 focus:outline-none focus:ring flex gap-1"
                 type="button"
               >
-                Cart
+                <span className="text-xl">
+                  <TiShoppingCart />
+                </span>{" "}
+                {cartItemCount}
               </button>
             </div>
           </div>
@@ -160,7 +164,7 @@ const App = () => {
                         <span className="tracking-wider ">
                           <button
                             className="block  px-5 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-200 focus:outline-none focus:ring mt-2"
-                            onClick={() => handleAddToCart(d?.id)}
+                            onClick={() => handleAddToCart(d)}
                           >
                             Add to Cart
                           </button>

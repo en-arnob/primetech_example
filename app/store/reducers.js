@@ -1,5 +1,6 @@
 const initialState = {
   cart: [],
+  cartItemCount: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -8,6 +9,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart, action.payload],
+        cartItemCount: state.cartItemCount + 1,
       };
     default:
       return state;
