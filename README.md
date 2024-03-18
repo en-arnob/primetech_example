@@ -1,1 +1,0 @@
-# primetech_example

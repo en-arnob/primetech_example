@@ -1,7 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/actions";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
+  const handleAddToCart = (productId) => {
+    dispatch(addToCart(productId));
+  };
+
   const [limit, setLimit] = useState(12);
   const [skip, setSkip] = useState(0);
   const [data, setData] = useState([]);
@@ -36,9 +45,7 @@ const App = () => {
       })
       .catch((err) => console.log(err));
   };
-  const handleAddToCart = (productId) => {
-    console.log(`Product with ID ${productId} added to cart.`);
-  };
+
   useEffect(() => {
     fetchData();
   }, [skip]);
