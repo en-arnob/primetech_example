@@ -138,10 +138,10 @@ const App = () => {
                 className="h-10 rounded border-gray-300 text-sm"
               >
                 <option>Default Sorting</option>
-                <option value="Title, DESC">Title, DESC</option>
-                <option value="Title, ASC">Title, ASC</option>
-                <option value="Price, DESC">Price, DESC</option>
-                <option value="Price, ASC">Price, ASC</option>
+                <option value="Title, DESC">Price</option>
+                <option value="Title, ASC">Rating</option>
+                <option value="Price, DESC">Category</option>
+                <option value="Price, ASC">Brand</option>
               </select>
             </div>
           </div>
