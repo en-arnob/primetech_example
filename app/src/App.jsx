@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../store/actions";
 import { TiShoppingCart } from "react-icons/ti";
+import toast from "react-hot-toast";
+import Header from "../components/Header";
 
 const App = () => {
   const dispatch = useDispatch();
-  const cartItemCount = useSelector((state) => state.cartItemCount);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    // console.log(product);
+    toast.success(`${product.title} added to the cart.`);
   };
 
   const [limit, setLimit] = useState(12);
@@ -53,32 +56,7 @@ const App = () => {
 
   return (
     <div className="">
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md py-4 px-8 z-10">
-        <div className="">
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <div className="text-center sm:text-left">
-              <input
-                type="text"
-                placeholder="Search"
-                className="peer h-8 w-full border-2  p-2 focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
-
-            <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-              <button
-                className=" rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-900 focus:outline-none focus:ring flex gap-1"
-                type="button"
-              >
-                <span className="text-xl">
-                  <TiShoppingCart />
-                </span>{" "}
-                {cartItemCount}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <section className="mt-20">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>
@@ -163,9 +141,12 @@ const App = () => {
                         </span>
                         <span className="tracking-wider ">
                           <button
-                            className="block  px-5 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-200 focus:outline-none focus:ring mt-2"
+                            className="flex  px-5 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-200 focus:outline-none focus:ring mt-2"
                             onClick={() => handleAddToCart(d)}
                           >
+                            <span className="text-xl">
+                              <TiShoppingCart />
+                            </span>
                             Add to Cart
                           </button>
                         </span>
