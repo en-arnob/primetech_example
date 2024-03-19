@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../src/App";
 import ProductView from "../src/ProductView";
+import CartView from "../src/CartView";
 
 const router = createBrowserRouter([
   {
@@ -12,5 +13,6 @@ const router = createBrowserRouter([
     path: "/product/:id",
     element: <ProductView />,
   },
+  { path: "/cart", element: <CartView /> },
 ]);
 export default router;

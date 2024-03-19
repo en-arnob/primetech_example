@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 import { addToCart, setSelectedProduct } from "../store/actions";
 import { TiShoppingCart } from "react-icons/ti";
 import toast from "react-hot-toast";
-
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 const App = () => {
   const dispatch = useDispatch();
-
+  const cartItemCount = useSelector((state) => state.cartItemCount);
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
     // console.log(product);
@@ -61,7 +61,33 @@ const App = () => {
 
   return (
     <div className="">
-      <Header />
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-md py-4 px-8 z-10">
+        <div className="">
+          <div className="sm:flex sm:items-center sm:justify-between">
+            <div className="text-center sm:text-left">
+              <input
+                type="text"
+                placeholder="Search"
+                className="peer h-8 w-full border-2  p-2 focus:outline-none focus:ring-0 sm:text-sm"
+              />
+            </div>
+
+            <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+              <Link to={`/cart`}>
+                <button
+                  className=" rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-900 focus:outline-none focus:ring flex gap-1"
+                  type="button"
+                >
+                  <span className="text-xl">
+                    <TiShoppingCart />
+                  </span>{" "}
+                  {cartItemCount}
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
       <section className="mt-20">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>

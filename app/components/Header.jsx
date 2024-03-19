@@ -1,5 +1,6 @@
 import { TiShoppingCart } from "react-icons/ti";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const cartItemCount = useSelector((state) => state.cartItemCount);
@@ -18,15 +19,17 @@ const Header = () => {
             </div>
 
             <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-              <button
-                className=" rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-900 focus:outline-none focus:ring flex gap-1"
-                type="button"
-              >
-                <span className="text-xl">
-                  <TiShoppingCart />
-                </span>{" "}
-                {cartItemCount}
-              </button>
+              <Link to={`/cart`}>
+                <button
+                  className=" rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-teal-900 focus:outline-none focus:ring flex gap-1"
+                  type="button"
+                >
+                  <span className="text-xl">
+                    <TiShoppingCart />
+                  </span>{" "}
+                  {cartItemCount}
+                </button>
+              </Link>
             </div>
           </div>
         </div>

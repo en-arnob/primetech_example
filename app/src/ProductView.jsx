@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/actions";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const ProductView = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,10 @@ const ProductView = () => {
     // console.log(product);
     toast.success(`${product.title} added to the cart.`);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Header />
