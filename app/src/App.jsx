@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/actions";
+import { addToCart, setSelectedProduct } from "../store/actions";
 import { TiShoppingCart } from "react-icons/ti";
 import toast from "react-hot-toast";
-import Header from "../components/Header";
 
+import { Link } from "react-router-dom";
+import Header from "../components/Header";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -37,6 +38,10 @@ const App = () => {
 
   const handleNextPage = () => {
     pageChange(activePage + 1);
+  };
+  const handleProductClick = (product) => {
+    dispatch(setSelectedProduct(product));
+    // console.log(product);
   };
   const fetchData = () => {
     setIsLoading(true);
@@ -120,8 +125,18 @@ const App = () => {
           ) : (
             <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {data?.map((d) => (
-                <li key={d?.id} className="text-center border-2">
-                  <a href="#" className="group block overflow-hidden">
+                <li
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleProductClick(d);
+                  }}
+                  key={d?.id}
+                  className="text-center border-2"
+                >
+                  <Link
+                    to={`/product/${d.id}`}
+                    className="group block overflow-hidden"
+                  >
                     <img
                       src={d?.thumbnail}
                       alt=""
@@ -139,20 +154,20 @@ const App = () => {
                         <span className="tracking-wider text-red-500">
                           {d?.price} $
                         </span>
-                        <span className="tracking-wider ">
-                          <button
-                            className="flex  px-5 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-200 focus:outline-none focus:ring mt-2"
-                            onClick={() => handleAddToCart(d)}
-                          >
-                            <span className="text-xl">
-                              <TiShoppingCart />
-                            </span>
-                            Add to Cart
-                          </button>
-                        </span>
                       </p>
                     </div>
-                  </a>
+                  </Link>
+                  <span className="tracking-wider ">
+                    <button
+                      className="flex  px-5 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-200 focus:outline-none focus:ring mt-2"
+                      onClick={() => handleAddToCart(d)}
+                    >
+                      <span className="text-xl">
+                        <TiShoppingCart />
+                      </span>
+                      Add to Cart
+                    </button>
+                  </span>
                 </li>
               ))}
             </ul>

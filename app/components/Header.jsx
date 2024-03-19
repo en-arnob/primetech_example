@@ -1,12 +1,11 @@
-import { useSelector } from "react-redux";
-
 import { TiShoppingCart } from "react-icons/ti";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const cartItemCount = useSelector((state) => state.cartItemCount);
-
   return (
     <div>
+      {" "}
       <header className="fixed top-0 left-0 right-0 bg-white shadow-md py-4 px-8 z-10">
         <div className="">
           <div className="sm:flex sm:items-center sm:justify-between">

@@ -1,6 +1,9 @@
+import { SET_SELECTED_PRODUCT, CLEAR_SELECTED_PRODUCT } from "./actions";
+
 const initialState = {
   cart: [],
   cartItemCount: 0,
+  selectedProduct: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,6 +13,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload],
         cartItemCount: state.cartItemCount + 1,
+      };
+    case SET_SELECTED_PRODUCT:
+      return {
+        ...state,
+        selectedProduct: action.payload,
+      };
+    case CLEAR_SELECTED_PRODUCT:
+      return {
+        ...state,
+        selectedProduct: null,
       };
     default:
       return state;
